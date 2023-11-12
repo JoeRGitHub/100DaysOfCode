@@ -25,7 +25,7 @@ def operator():
   
 dic_num1 = {}
 
-def calculator(a=None, b='',c=None):
+def calculator(a=None):
   
   get_operator= ''
 
@@ -57,12 +57,12 @@ def calculator(a=None, b='',c=None):
 
   i =  input(f"Type 'y' to continue calculating with {result}, or type 'n' to start a new calculation: ")
   if i == 'y':
-    calculator(a=result, b='', c=None)
+    calculator(a=result)
     print(f'after: {result}')
   else:
     clear()
-    calculator(a=None, b='',c=None)
+    calculator(a=None)
 
-result = calculator(a=None, b='',c=None)
+result = calculator(a=None)
 print(result)
 
