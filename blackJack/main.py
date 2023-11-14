@@ -21,14 +21,15 @@ import random
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 result = {}
-player_list = []
-dealer_list = []
+
 
 def cards_random_number(num_of_cards=1):
+    player_list = []
+    dealer_list = []
     player_score = 0
     dealer_score = 0
     while num_of_cards > 0:
-        
+         
         cards_player = random.choice(cards)
         cards_dealer = random.choice(cards)
         player_list.append(cards_player)
@@ -42,20 +43,31 @@ def cards_random_number(num_of_cards=1):
     print(f"Player cards: {result['player_cards']}, Current score: {player_score}")
     print(f"Dealer cards: {result['dealer_cards'][0]}, Current score: {dealer_score}")
 
-def playGame():
+    continue_round = input("Type 'y' to get another card, type 'n' to pass: ")
+    #print(f'from cards_random_number:{continue_round}')
+    #playGame(continue_round)
+
+    if continue_round == 'y':
+        cards_random_number()
+    else:
+        print("See you!")
+    
+
+def playGame(continue_round):
     #play = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
-    continue_round = 'y'
+    #continue_round = 'y'
+    #print(f'from playGame ext:{continue_round}')
     while continue_round == 'y':
-        #print(f'before: {continue_round}')
-        continue_round = input("Type 'y' to get another card, type 'n' to pass: ")
-        #print(f'efter: {continue_round}')
+        #print(f'from playGame int:{continue_round}')
+        continue_round = 'n'
+        cards_random_number()
 
 def startGame():
     play = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
     print(play)
     if play == 'y':
         cards_random_number(num_of_cards=2)
-        playGame()
+        #playGame()
         print("Good") # check why the func is returning this print
     else:
         print("ByBy")
