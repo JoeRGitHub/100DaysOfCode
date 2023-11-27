@@ -18,18 +18,18 @@
 ## The computer is the dealer.:
 
 import random
+import os
+clear = lambda: os.system('clear')
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-result = {}
 player = {}
 dealer = {}
 player_list = []
 dealer_list = []
-
 player_score = 0
 dealer_score = 0
 
-def playe_cards(num_of_cards=1):
+def player_cards(num_of_cards=1):
     global player_score
     while num_of_cards > 0:
         cards_player = random.choice(cards)
@@ -38,15 +38,8 @@ def playe_cards(num_of_cards=1):
         num_of_cards -= 1
         player['player_cards'] = player_list
 
-    if player_score >= 21:
-        print('You scroe is more then 21, you loss')
-        return
-
     print(f"Player cards: {player['player_cards']}, Current score: {player_score}")
 
-def check_21():
-    if player_score >=21:
-        print(f'You scroe is {player_score}, more then 21, You loss')
 
 def dealer_cards(num_of_cards=1):
     global dealer_score
@@ -57,34 +50,87 @@ def dealer_cards(num_of_cards=1):
         num_of_cards -= 1 #Count down
         dealer['dealer_cards'] = dealer_list #Add to dic
 
-    if dealer_score >= 21:
-        print('You scroe is more then 21, you loss')
-        return
-    
     print(f"Dealer cards: {dealer['dealer_cards'][0]}, Current score: {dealer_score}")
+    check_21()
+    
 
+def check_21():
+    global player_score
+    global dealer_score
+    if player_score >=21:
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
+        print(f'You went over. You lose\n')
+        player.clear()
+        player_list.clear()
+        dealer.clear()
+        dealer_list.clear()
+        player_score = 0
+        dealer_score = 0
+        startGame()
+    elif dealer_score >=21:
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
+        print(f'Dealer went over. You win\n')
+        player.clear()
+        player_list.clear()
+        dealer.clear()
+        dealer_list.clear()
+        player_score = 0
+        dealer_score = 0        
+        startGame()
+    else:
+        continue_round()
+    
+def continue_round():
     continue_round = input("Type 'y' to get another card, type 'n' to pass: ")
     if continue_round == 'y':
-        playGame(continue_round)
+        player_cards()
+        dealer_cards()
     else:
+        check_17()
         print("See you!")
 
-def playGame(continue_round):
-    while continue_round == 'y':
-        continue_round = 'n'
-        #print(f'\nBefore: {player}')
-        playe_cards()
-        #check_21()
-        #print(f'After: {player}')
-        #print(f'Befroe: {dealer}')
-        dealer_cards()
-        
-        #print(f'After: {dealer}')
+def check_17():
+    global dealer_score
+    if dealer_score <= 17:
+        while dealer_score <= 17:
+            cards_dealer = random.choice(cards) #Get random number from list
+            dealer_list.append(cards_dealer) #Create one list 
+            dealer_score += cards_dealer #Sum score
+            check_17()
+            #check_21()
+    else:
+        check_21()
+
+def finel():
+    if player_score == dealer_score:
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
+        print(f'Draw result!\n')
+
+    elif player_score < dealer_score:
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
+        print(f'Dealer win!\n')
+
+    elif player_score > dealer_score:
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
+        print(f'You win!\n')
+
+    continue_round()   
+
+player_score = 0
+dealer_score = 0
 
 def startGame():
+    
     play = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
+
     if play == 'y':
-        playe_cards(num_of_cards=2)
+        clear()
+        player_cards(num_of_cards=2)
         dealer_cards(num_of_cards=2)
     else:
         print("ByBy")
