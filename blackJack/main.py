@@ -60,12 +60,12 @@ def check_21():
     if player_score >=21: 
         print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
         print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
-        print(f'You went over. You lose\n')
+        print(f'You went over. You lose 😬\n')
         startGame()
     elif dealer_score >=21:
         print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
         print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
-        print(f'Dealer went over. You win\n')       
+        print(f'Dealer went over. You win 🤩\n')       
         startGame()
     else:
         continue_round()
@@ -85,36 +85,38 @@ def continue_round():
 
 def check_17():
     global dealer_score
-    print(f'Out: {dealer_score}')
+    #print(f'Out: {dealer_score}')
     
     while dealer_score <= 17:
         cards_dealer = random.choice(cards)
         dealer_list.append(cards_dealer)
         dealer_score += cards_dealer
-        print(f'In: {dealer_score}')
+        #print(f'In: {dealer_score}')
         
     finel()
 
 def finel():
-    if player_score or dealer_score > 21:
+    print(f'player: {player_score} dealer: {dealer_score}')
+    if player_score > 21 or dealer_score > 21:
+        #print('check 21')
         check_21()
 
     elif player_score == dealer_score:
         print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
         print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
-        print(f'Draw result!\n')
+        print(f'Draw result! 🙃\n')
         startGame()
 
     elif player_score < dealer_score:
         print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
         print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
-        print(f'Dealer win!\n')
+        print(f'Dealer win! 😬\n')
         startGame()
 
     elif player_score > dealer_score:
         print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
         print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
-        print(f'You win!\n')
+        print(f'You win! 🤩\n')
         startGame() 
 
 def startGame():
@@ -135,6 +137,6 @@ def startGame():
         player_cards(num_of_cards=2)
         dealer_cards(num_of_cards=2)
     else:
-        print("ByBy")
+        print("\nSee you next time 😀")
 
 startGame()
