@@ -23,55 +23,23 @@ import os
 clear = lambda: os.system('clear')
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-#player = {}
-#dealer = {}
+player = {}
+dealer = {}
 player_list = []
 dealer_list = []
 player_score = 0
 dealer_score = 0
 
-user_cards = []
-computer_cards = []
-
-# def deal_card():
-#     cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-#     card = random.choice(cards)
-#     #print(card)
-#     return card
-
-# for _ in range(2):
-#     user_cards.append(deal_card())
-#     computer_cards.append(deal_card())
-# print(user_cards,computer_cards)
-
-# def calculate_score(sum_cards_list):
-#     return sum(sum_cards_list) 
-
-
-
-# def player_cards_2():
-#     user_cards.append(deal_card())
-#     computer_cards.append(deal_card())
-    
-#     user_score = calculate_score(user_cards)
-#     computer_score = calculate_score(computer_cards)
-#     print(user_cards,computer_cards)
-#     print(user_score)
-#     print(computer_score)
-# player_cards_2()
-
-
-
 def player_cards(num_of_cards=1):
     global player_score
-    #print(user_score)
     while num_of_cards > 0:
         cards_player = random.choice(cards)
         player_list.append(cards_player)
         player_score += cards_player
         num_of_cards -= 1
-        #player['player_cards'] = player_list
-    print(f"Player cards: {player_list}, Current score: {player_score}")
+        player['player_cards'] = player_list
+
+    print(f"Player cards: {player['player_cards']}, Current score: {player_score}")
 
 
 def dealer_cards(num_of_cards=1):
@@ -81,9 +49,9 @@ def dealer_cards(num_of_cards=1):
         dealer_list.append(cards_dealer) #Create one list 
         dealer_score += cards_dealer #Sum score
         num_of_cards -= 1 #Count down
-        #dealer['dealer_cards'] = dealer_list #Add to dic
+        dealer['dealer_cards'] = dealer_list #Add to dic
 
-    print(f"Dealer cards: {dealer_list[0]}, Current score: {dealer_score}")
+    print(f"Dealer cards: {dealer['dealer_cards'][0]}, Current score: {dealer_score}")
     check_21()
     
 
@@ -91,13 +59,13 @@ def check_21():
     global player_score
     global dealer_score
     if player_score >=21: 
-        print(f"\nYou finel hand: {player_list}, Current score: {player_score}")
-        print(f"Dealer finel hand: {dealer_list}, Current score: {dealer_score}")
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
         print(f'You went over. You lose 😬\n')
         startGame()
     elif dealer_score >=21:
-        print(f"\nYou finel hand: {player_list}, Current score: {player_score}")
-        print(f"Dealer finel hand: {dealer_list}, Current score: {dealer_score}")
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
         print(f'Dealer went over. You win 🤩\n')       
         startGame()
     else:
@@ -135,20 +103,20 @@ def finel():
         check_21()
 
     elif player_score == dealer_score:
-        print(f"\nYou finel hand: {player_list}, Current score: {player_score}")
-        print(f"Dealer finel hand: {dealer_list}, Current score: {dealer_score}")
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
         print(f'Draw result! 🙃\n')
         startGame()
 
     elif player_score < dealer_score:
-        print(f"\nYou finel hand: {player_list}, Current score: {player_score}")
-        print(f"Dealer finel hand: {dealer_list}, Current score: {dealer_score}")
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
         print(f'Dealer win! 😬\n')
         startGame()
 
     elif player_score > dealer_score:
-        print(f"\nYou finel hand: {player_list}, Current score: {player_score}")
-        print(f"Dealer finel hand: {dealer_list}, Current score: {dealer_score}")
+        print(f"\nYou finel hand: {player['player_cards']}, Current score: {player_score}")
+        print(f"Dealer finel hand: {dealer['dealer_cards']}, Current score: {dealer_score}")
         print(f'You win! 🤩\n')
         startGame() 
 
@@ -161,9 +129,9 @@ def startGame():
 
     if play == 'y':
         clear()
-        #player.clear()
+        player.clear()
         player_list.clear()
-        #dealer.clear()
+        dealer.clear()
         dealer_list.clear()
         player_score = 0
         dealer_score = 0
