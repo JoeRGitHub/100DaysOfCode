@@ -44,6 +44,7 @@ def computer():
     computer_score = calculate_score(computer_cards)
     return  computer_cards, computer_score
 
+
 def check_21_ply():
     if calculate_score(user_cards) < 21:
         print(f'Player cards: {user_cards}, Current score: {calculate_score(user_cards)}')    
@@ -83,12 +84,20 @@ def check_17():
             print('User Won')
         elif calculate_score(user_cards) == calculate_score(computer_cards):
             print("Draw!")
+        # elif calculate_score(user_cards) > calculate_score(computer_cards):
+        #     print('User Won!')
+        # elif calculate_score(user_cards) < calculate_score(computer_cards):
+        #     print('Computer Won!')
+        # and calculate_score(computer_cards) < 21 and calculate_score(user_cards) < calculate_score(computer_cards):
+        # and calculate_score(user_cards) < 21 and calculate_score(user_cards) > calculate_score(computer_cards):
+
     play_again()    
         
 def continue_round():
     while check_21_ply() and check_21_com() == True and input("Type 'y' to get another card, type 'n' to pass: ") == 'y':
         player()
         computer()
+
     else:
         check_17()
 
