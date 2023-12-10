@@ -18,7 +18,7 @@ hard = 5
 
 def choice_game_lavel(easy,hard):
     print(logo)
-    leval_game = input("Choice game leval 'Easy' or 'Hard': ")
+    leval_game = input("Choose a difficulty. Type 'easy' or 'hard': ")
     out = int(input('Guess a number between 1 to 100: '))
     if leval_game == 'easy':
         while out != rand_num and easy > 0:
@@ -27,6 +27,7 @@ def choice_game_lavel(easy,hard):
               print("To low.")
             elif rand_num < out:
               print("To high.")
+            print(f'You have {easy} attempts remaining to guess the number.')
             out = int(input('Guess a number between 1 to 100: '))
         else:
             if easy == 0:
@@ -38,10 +39,12 @@ def choice_game_lavel(easy,hard):
         print(f'out befroe while: {out}')
         while out != rand_num and hard > 0:
             hard -= 1
+            print(f'You have {hard} attempts remaining to guess the number.')
             if rand_num > out:
               print("To low.")
             elif rand_num < out:
-              print("To high.")            
+              print("To high.") 
+            print(f'You have {hard} attempts remaining to guess the number.')                         
             out = int(input('Guess a number between 1 to 100: '))
         else:
             if hard == 0:
