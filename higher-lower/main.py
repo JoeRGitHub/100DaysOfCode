@@ -16,9 +16,9 @@ dbRandomNumber = {'key':None}
 def generate_different_numbers():
     x = random.randint(0, 49) 
     print(f'Befroe: {dbRandomNumber}')
-    while dbRandomNumber['key'] == x: # 17 == 17
+    while dbRandomNumber['key'] == x: 
         print('The numbers are the same')
-        x = random.randint(0, 49) #17
+        x = random.randint(0, 49)
     else:
         dbRandomNumber['key'] = x
         print(f'After: {dbRandomNumber}')
@@ -40,7 +40,6 @@ score = 0
 compareA = getChoice()
 
 def a_VS_b():
-    #compareA = getChoice()
     global compareA
     global score
 
