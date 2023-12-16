@@ -1,3 +1,4 @@
+
 data = [
     {
         'name': 'Instagram',
@@ -300,3 +301,5 @@ data = [
         'country': 'United States'
     }
 ]
+
+#Compare B: Virat Kohli a Cricketer, from India
