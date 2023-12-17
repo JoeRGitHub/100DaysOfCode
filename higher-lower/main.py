@@ -5,7 +5,7 @@
 # The comparison will be made from an existing dic within a list of options under the 'follower_count' key.
 # From the second guessesing options, the guesses B will become A, anb a new randome options will appear under option B etc.
 # The info for user to guess: "Neymar, a Footballer, from Brasil."
-# URL to the orginel game: http://www.higherlowergame.com/ and https://replit.com/@appbrewery/higher-lower-final?v=1 
+# URL to the original game: http://www.higherlowergame.com/ and https://replit.com/@appbrewery/higher-lower-final?v=1 
 
 import random
 from game_data import data
