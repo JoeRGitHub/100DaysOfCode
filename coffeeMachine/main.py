@@ -4,7 +4,6 @@ from coffeeMachineData import MENU, resources
 def checkResources(userChoice):
     water = MENU[userChoice]['ingredients']['water']
     coffee = MENU[userChoice]['ingredients']['coffee']
-
     cost = MENU[userChoice]['cost']
 
     if userChoice == 'espresso':
@@ -25,11 +24,36 @@ def checkResources(userChoice):
             resources['water'] = waterSum
             resources['milk'] = milkSum
             resources['coffee'] = coffeeSum
-            print(f"Water: {resources['water']}\nMilk: {resources['milk']}\nCoffee: {resources['coffee']}")
+            print(f"Remaining resources:\n Water: {resources['water']}\nMilk: {resources['milk']}\nCoffee: {resources['coffee']} \nMoney: {resources['money']}")
         else:
             print('Not enough')
 
 #TODO: Process coins
+def processCoins(userChoice):
+    cost = MENU[userChoice]['cost'] #3.0
+    print('Your cost is:', cost)
+    quarters = 0.25
+    dimes = 0.10
+    nickles = 0.05
+    pennies = 0.01
+
+    #cashRegister = int(input("Please insert coins:\n(quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01)"))
+    cashQuarters = int(input("Quarters(0.25): ")) * quarters
+    cashDimes = int(input("Dimes(0.10): ")) * dimes
+    cashNickles = int(input("Nickles(0.05): ")) * dimes
+    cashPennies = int(input("Pennies(0.01): ")) * pennies
+    x = cashQuarters + cashDimes + cashNickles + cashPennies
+    print(f'flow {x}')
+    #  = 10 * 0.25 = 2.5
+    #  = 2.5 - 3.0 = 0.5
+    #new_cost = x - cost
+    while cost < x:
+        print("Sorry that's not enough money. Money refunded.")
+        processCoins(userChoice)
+    else:
+        new_cost = x - cost
+        resources['money']  =+ new_cost
+        print(f'{round(new_cost,2)}')
 
 #TODO: ask user to choice an order
 def userOrder():
@@ -43,6 +67,7 @@ def userOrder():
                 print(i, resources[i])
         else:
             #print(MENU[userChoice])
+            processCoins(userChoice)
             checkResources(userChoice)
 
 userOrder()
