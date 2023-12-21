@@ -13,6 +13,7 @@ def checkResources(userChoice):
             resources['water'] = waterSum
             resources['coffee'] = coffeeSum
             print(f"Water: {resources['water']}\nMilk: {resources['milk']}\nCoffee: {resources['coffee']}")
+            processCoins(userChoice)
         else:
             print('Not enough')
     elif userChoice == 'cappuccino' or userChoice == 'latte':
@@ -24,7 +25,8 @@ def checkResources(userChoice):
             resources['water'] = waterSum
             resources['milk'] = milkSum
             resources['coffee'] = coffeeSum
-            print(f"Remaining resources:\n Water: {resources['water']}\nMilk: {resources['milk']}\nCoffee: {resources['coffee']} \nMoney: {resources['money']}")
+            print(f"Remaining resources:\nWater: {resources['water']}\nMilk: {resources['milk']}\nCoffee: {resources['coffee']} \nMoney: {resources['money']}")
+            processCoins(userChoice)
         else:
             print('Not enough')
 
@@ -47,13 +49,13 @@ def processCoins(userChoice):
     #  = 10 * 0.25 = 2.5
     #  = 2.5 - 3.0 = 0.5
     #new_cost = x - cost
-    while cost < x:
+    if x < cost:
         print("Sorry that's not enough money. Money refunded.")
-        processCoins(userChoice)
+        userOrder()
     else:
-        new_cost = x - cost
-        resources['money']  =+ new_cost
-        print(f'{round(new_cost,2)}')
+        refund = x - cost
+        resources['money']  += cost
+        print(f"Custmer refund: {round(refund,2)}, Cash register: {resources['money']}")
 
 #TODO: ask user to choice an order
 def userOrder():
@@ -65,10 +67,14 @@ def userOrder():
         elif userChoice == 'report':
             for i in resources:
                 print(i, resources[i])
+        # elif userChoice == 'espresso' or 'latte' or 'cappuccino':
+        #     processCoins(userChoice)
+        #     checkResources(userChoice)
         else:
             #print(MENU[userChoice])
-            processCoins(userChoice)
             checkResources(userChoice)
+
+
 
 userOrder()
 
