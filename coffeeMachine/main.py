@@ -53,9 +53,12 @@ def processCoins(userChoice):
         print("Sorry that's not enough money. Money refunded.")
         userOrder()
     else:
+        processCoins(userChoice)
         refund = x - cost
         resources['money']  += cost
         print(f"Custmer refund: {round(refund,2)}, Cash register: {resources['money']}")
+#TODO: Process order
+
 
 #TODO: ask user to choice an order
 def userOrder():
@@ -73,8 +76,6 @@ def userOrder():
         else:
             #print(MENU[userChoice])
             checkResources(userChoice)
-
-
 
 userOrder()
 
