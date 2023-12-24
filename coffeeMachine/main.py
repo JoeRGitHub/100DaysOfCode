@@ -20,25 +20,27 @@ def checkResources(userChoice):
 
 #TODO: Process coins
 def processCoins(userChoice):
-    cost = MENU[userChoice]['cost'] #3.0
-    print('Your cost is:', cost)
     quarters = 0.25
     dimes = 0.10
     nickles = 0.05
     pennies = 0.01
-    cashQuarters = int(input("Quarters(0.25): ")) * quarters
-    cashDimes = int(input("Dimes(0.10): ")) * dimes
-    cashNickles = int(input("Nickles(0.05): ")) * dimes
-    cashPennies = int(input("Pennies(0.01): ")) * pennies
-    x = cashQuarters + cashDimes + cashNickles + cashPennies
-    print(f'flow {round(x,2)}')
-    if x < cost:
+    cost = MENU[userChoice]['cost']
+    print('Your cost is:', cost)
+
+    cashQuarters = float(input("Quarters(0.25): ")) * quarters
+    cashDimes = float(input("Dimes(0.10): ")) * dimes
+    cashNickles = float(input("Nickles(0.05): ")) * dimes
+    cashPennies = float(input("Pennies(0.01): ")) * pennies
+    summCurrencies = cashQuarters + cashDimes + cashNickles + cashPennies
+    print(f'Money paid: {round(summCurrencies,2)}')
+    if summCurrencies < cost:
         print("Sorry that's not enough money. Money refunded.")
         userOrder()
     else:
-        refund = x - cost
+        refund = summCurrencies - cost
         resources['money'] += cost
-        print(f"Custmer refund: {round(refund,2)}, Cash register: {resources['money']}")
+        print(f"Here is {round(refund,2)} in change.\nCash register: {resources['money']}")
+        print(f'Here is your {userChoice} ☕️. Enjoy!')
         userDrinkOrder(userChoice)
 
 #TODO: Process order
@@ -47,7 +49,7 @@ def userDrinkOrder(userChoice):
     coffee = MENU[userChoice]['ingredients']['coffee']
     cost = MENU[userChoice]['cost']
 
-    if userChoice == 'latte' and 'cappuccino':
+    if userChoice == 'latte' or 'cappuccino':
         milk = MENU[userChoice]['ingredients']['milk']
         waterSum = resources['water'] - water
         coffeeSum = resources['coffee'] - coffee
@@ -59,7 +61,7 @@ def userDrinkOrder(userChoice):
         coffeeSum = resources['coffee'] - coffee
         resources['water'] = waterSum
         resources['coffee'] = coffeeSum
-        print(f"Water: {resources['water']}\nMilk: {resources['milk']}\nCoffee: {resources['coffee']}")
+        print(f"Water: {resources['water']}\nCoffee: {resources['coffee']}")
 
 #TODO: ask user to choice an order
 def userOrder():
