@@ -1,4 +1,6 @@
 Coffee Machine Program Requirements:
+link to original game and code:
+https://replit.com/@appbrewery/coffee-machine-final?embed=1&output=1#main.py 
 
 1. Prompt the user by asking, “What would you like? (espresso/latte/cappuccino):”
   a. Check the user’s input to decide what to do next.
