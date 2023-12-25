@@ -39,7 +39,7 @@ def processCoins(userChoice):
     else:
         refund = summCurrencies - cost
         resources['money'] += cost
-        print(f"Here is {round(refund,2)} in change.\nCash register: {resources['money']}")
+        print(f"Here is your {round(refund,2)} change.\nCash register: {resources['money']}")
         print(f'Here is your {userChoice} ☕️. Enjoy!')
         userDrinkOrder(userChoice)
 
@@ -55,7 +55,7 @@ def userDrinkOrder(userChoice):
         coffeeSum = resources['coffee'] - coffee
         resources['water'] = waterSum
         resources['coffee'] = coffeeSum
-        print(f"Water: {resources['water']}\nMilk: {resources['milk']}\nCoffee: {resources['coffee']}")
+        print(f"\nRemaining resources:\nWater: {resources['water']}\nMilk: {resources['milk']}\nCoffee: {resources['coffee']}\n")
     elif userChoice == 'espresso':
         waterSum = resources['water'] - water
         coffeeSum = resources['coffee'] - coffee
