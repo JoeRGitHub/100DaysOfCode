@@ -1,30 +1,19 @@
-from quiz_brain import question_bank
+from data import question_data
+from question_model import Question
+from quiz_brain import QuizBrain
 
-class QuizBrain:
-    def __init__(self):
-        self.question_number = 0
-        self.question_list = question_bank
-    def next_question(self):
-        for i in range(len(self.question_list)):
-            question = self.question_list[i]
-            game_answer = self.question_list[i].answer
-            print(f'\nGame answer: {game_answer}')
-            print(f'Q{i}: {question.text}')
+question_bank = []
 
-            user_input = input("True or False: ").lower().strip()
-            if user_input == game_answer.lower():
-                print('\nCorrect!')
-                self.question_number += 1
-                print(f'question score: {self.question_number}/{len(self.question_list)}')
-            else:
-                print('\nWrong!')
-                print(f'sum question score: {self.question_number}/{len(self.question_list)}')
-                return
+for i in question_data:
+    question_text = i["text"]
+    question_answer = i["answer"]
+    new_question = Question(question_text, question_answer)
+    question_bank.append(new_question)
 
-        print('Good job! End of questions')
+quiz = QuizBrain(question_bank)
 
+while quiz.check_question_status():
+    quiz.next_question()
 
-quiz = QuizBrain()
-quiz.next_question()
-
-
+if quiz.question_number == len(question_bank):
+    print('\nGood job! End of questions')
