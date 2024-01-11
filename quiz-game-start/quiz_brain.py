@@ -26,10 +26,10 @@ class QuizBrain:
         print('End of loop')
 
 
-tim = QuizBrain()
+quiz = QuizBrain()
 # print(tim.question_list[0].text)
 #
 # tim.question_number = 2
 # print(tim.question_number)
 
-tim.next_question()
+quiz.next_question()
