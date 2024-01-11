@@ -14,22 +14,3 @@ question_data = [
     {"text": "No piece of square dry paper can be folded in half more than 7 times.", "answer": "False"},
     {"text": "A few ounces of chocolate can to kill a small dog.", "answer": "True"}
 ]
-#
-
-# empty_list = []
-# for i in question_data:
-#     empty_list.append(question_data[i])
-# print(empty_list)
-
-# empty_list = []
-# for i in range(len(question_data)):
-#     q = question_data[i]["text"]
-#     a = question_data[i]["answer"]
-#     empty_list.append(q)
-#     empty_list.append(a)
-# print(empty_list)
-
-# for i in question_data:
-#     question = i["text"]
-#     answer = i["answer"]
-#     print(question, answer)
