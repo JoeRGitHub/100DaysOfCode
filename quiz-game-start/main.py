@@ -12,7 +12,7 @@ for i in question_data:
 
 quiz = QuizBrain(question_bank)
 
-while quiz.check_question_status():
+while quiz.has_more_questions():
     quiz.next_question()
 
 if quiz.question_number == len(question_bank):

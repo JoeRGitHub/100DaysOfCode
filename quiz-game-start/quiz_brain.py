@@ -5,7 +5,7 @@ class QuizBrain:
         self.question_number = 0
         self.question_list = question_bank
 
-    def check_question_status(self):
+    def has_more_questions(self):
         return self.question_number < len(self.question_list)
 
     def next_question(self):
