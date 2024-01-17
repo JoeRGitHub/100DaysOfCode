@@ -12,7 +12,7 @@ tim = turtle.Turtle()
 turtle.colormode(255)
 tim.pensize(2)
 tim.speed(50)
-
+tim.hideturtle()
 
 def change_color():
     x = random.choices(color_list)[0]
@@ -34,5 +34,6 @@ def loop_kube(num_of_lines, spass_between_lines):
 
 
 loop_kube(10, 30)
+
 
 turtle.exitonclick()
