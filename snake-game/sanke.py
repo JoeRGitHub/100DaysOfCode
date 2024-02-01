@@ -7,7 +7,6 @@ DOWN = 270
 RIGHT = 0
 LEFT = 180
 
-
 screen = Screen()
 
 class Snake:
@@ -25,12 +24,21 @@ class Snake:
             self.square_list.append(square)
 
     def move(self):
+        global new_segment_x, new_segment_y
         for seg_num in range(len(self.square_list) -1 ,0, -1): #the -1 is for the square_list[0-2]
             #print(seg_num)
             new_segment_x = self.square_list[seg_num - 1].xcor() #use the -1 to start form the end
             new_segment_y = self.square_list[seg_num - 1].ycor()
             self.square_list[seg_num].goto(new_segment_x, new_segment_y)
+            print(new_segment_x)
         self.head.forward(MOVE_DISTANCE)
+
+    def snake_extend(self):
+        new_square = Turtle("square")
+        new_square.penup()
+        new_square.color("white")
+        new_square.goto(new_segment_x, new_segment_y)
+        self.square_list.append(new_square)
 
     # prevent snake go backward
     def up(self):
@@ -51,5 +59,8 @@ class Snake:
 
     def home(self):
         self.head.home()
+
+    def pause(self):
+        self.head.pause()
 
 
