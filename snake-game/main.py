@@ -2,7 +2,7 @@ from turtle import Screen
 import time
 from sanke import Snake
 from food import Food
-from scoreboard import Scoreboard, Increase_score
+from scoreboard import Scoreboard
 
 SNAKE_SPEED = 0.1
 
@@ -15,9 +15,6 @@ screen.tracer(0) # Empty screen
 snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
-scoreboard.text_box()
-increase_score = Increase_score()
-increase_score.dot_box()
 
 screen.listen()
 screen.onkey(fun=snake.up, key="Up")
@@ -36,7 +33,7 @@ while game_on:
     # move dot to random point as soon as the snake is in distance of the dot
     if snake.head.distance(food) < 15:
         food.random_food()
-        increase_score.score()
+        scoreboard.increase_score()
         snake.snake_extend()
 
 screen.exitonclick()
