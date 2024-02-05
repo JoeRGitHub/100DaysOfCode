@@ -4,7 +4,7 @@ import random
 class Food(Turtle):
     def __init__(self):
         super().__init__()
-        self.shapesize(0.5) #the dot is 20x20 (1), half of that is 10x10 (0.5)
+        self.shapesize(0.5)  # the dot is 20x20 (1), half of that is 10x10 (0.5)
         self.color("blue")
         self.shape("circle")
         self.penup()
