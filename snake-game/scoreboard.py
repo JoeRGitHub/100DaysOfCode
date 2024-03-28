@@ -3,13 +3,15 @@ ALIGNMENT = "center"
 FONT = ('Courier', 20, 'normal')
 
 
-with open("/Users/yossir-macos/git/python-files/100DaysOfCode/snake-game/test.txt", 'r') as f:
+with open("/Users/yossir-macos/git/python-files/100DaysOfCode/snake-game/data.txt", 'r') as f:
     content = f.read()
 
 class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.points = 0
+        # with open("data.txt") as data:
+        #     self.high_score = int(data.read())
         self.high_score = int(content)
         self.color("white")
         self.penup()
@@ -19,6 +21,7 @@ class Scoreboard(Turtle):
 
     def update_score(self):
         self.clear()
+        # self.write(f"Score: {self.points} High Score: {self.high_score}", move=False, align=ALIGNMENT, font=FONT)
 
         if self.points >= self.high_score:
             self.write(f"Score: {self.points} High Score: {self.high_score}", move=False, align=ALIGNMENT, font=FONT)
@@ -39,9 +42,9 @@ class Scoreboard(Turtle):
     def save_high_score(self):
         if self.points > self.high_score:
             self.high_score = self.points
-        #self.points = 0
+        # #self.points = 0
 
         # Save high_score to a file so it will show in the next time the game is used
-        with open("test.txt", mode='w') as file:
+        with open("data.txt", mode='w') as file:
             file.write(str(self.high_score))
         self.update_score()

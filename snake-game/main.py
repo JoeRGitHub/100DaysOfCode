@@ -46,7 +46,6 @@ while game_on:
         snake.head.goto(x=snake.head.pos()[0], y=300)
     #  Detect collision of the snake with itself
     for square in snake.square_list[1:]:
-
         if snake.head.distance(square) < 10:
             scoreboard.save_high_score()
             game_on = False
