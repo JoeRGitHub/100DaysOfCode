@@ -22,8 +22,8 @@ for turtle_index in range(0, 6):
 in_race = True
 
 while in_race:
-    for i in follow_result:
-        if i.xcor() < 200:
+    for i in follow_result:  #1
+        if i.xcor() < 220:
             x = random.choice(follow_result)
             x.forward(5.5)
             print(i.xcor())
