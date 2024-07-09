@@ -29,16 +29,24 @@ def main():
         print(state_answer)
 
         if state_answer == "Exit":
-            for i in df.state:
-                if i not in guess_list:
-                    update_list.append(i)
+
+            # for i in df.state:
+            #     if i not in guess_list:
+            #         update_list.append(i)
+
+            # Change to list comprehension
+            missing_states = [state for state in df.state if state not in guess_list]
+
             # Create a new CSV file form the reminder state
             # The 'w+' overwrite the exists file
-            new_csv = pd.DataFrame(update_list)
+
+            # Change to list comprehension
+            # new_csv = pd.DataFrame(update_list)
+            new_csv = pd.DataFrame(missing_states)
             new_csv.to_csv("remind_states.csv", mode='w+')
 
             print(guess_list)
-            print(f'List of missing countries:\n{update_list}')
+            print(f'List of missing countries:\n{result}')
             break
 
         if state_answer in df['state'].values and state_answer not in guess_list:
