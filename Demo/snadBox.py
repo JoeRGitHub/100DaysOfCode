@@ -1,12 +1,16 @@
-import random
+def add(*args):
+    print(args[0])
+    return sum(args)
 
-names = ['James', 'Michael', 'Robert', 'John']
-results = {student:random.randint(1,50) for student in names}
-print(results)
-
-# Create a dictionary of students who scored more than 40
-pass_student = {student:score for student, score in results.items() if score > 20 }
-print(pass_student)
+print(f"test using *args: {add(5,3,5)}")
 
 
 
+def word(n,**kwargs):
+    # print(kwargs)
+    # print(kwargs["a"])
+    n += kwargs["add"]
+    n *= kwargs["multiply"]
+    print("test using **kwargs:",n)
+
+word(2,add=3, multiply=5)

@@ -58,40 +58,24 @@ print(f'list comprehension squared numbers: {new_numbers_list_comp}')
 
 ##########################################
 
-# Open both files for reading
-with open('file1.txt', 'r') as a, open('file2.txt', 'r') as b:
-    content_a = a.read().split()
-    content_b = b.read().split()
+# TODO: create a script to compare between two files and find the similar numbers
+#  and print them in a  list
 
-# Find common elements by checking if each element in content_a is also in content_b
-# Convert the common elements to integers and store them in the result list
-result = [int(num) for num in content_a if num in content_b]
-print(result)
+with open("file1.txt") as file1, open("file2.txt") as file2:
+    # x = file1.read().split()
+    # y = file2.read().split()
+    #
+    # result = []
+    # for num in x:
+    #     if num in y:
+    #         result.append(int(num))
+    # print(result)
 
-    ## I'm leaving for the record how much trouble I got into just to solve this problem.
-    ## In the end the answer was right under my nose.I turned out to be a stupid
+    list1 = file1.readlines()
+    list2 = file2.readlines()
 
-    # convert str to int and use split to break the content of the file into individual elements
-    # x = [int(i) for i in content_a]
-    # y = [int(i) for i in content_b]
-    # print("List x:",x)
-    # print("List x:",y)
-
-    # At first, I tried to work with zip, but I came to see that it's not good.
-    # The comparison is not a list against a list, but a number against a number within the tuple.
-
-    # for i,j in zip(x,y):
-    #     if i == j:
-    #         print(i)
-
-    # x = [i for i,j in zip(x,y) if i == j]
-    # print(x)
-
-    # common_elements = set(x) & set(y)
-    # if common_elements:
-    #     print(f"Matching numbers: {common_elements}")
-    # else:
-    #     print("No matching numbers")
+result1 = [int(num) for num in list1 if num in list2]
+print(result1)
 
 ##########################################
 # Lesson 241:
@@ -118,7 +102,7 @@ print('Dict list of names with their results more then x: ',pass_student)
 ##########################################
 # Lesson 243:
 
-weather_c = eval("{'James': 3, 'Michael': 42, 'Robert': 25, 'John': 4}")
+weather_c = eval("{'NY': 35, 'JS': 42, 'WDS': 25, 'SD': 23}")
 
 # for name, score in weather_c.items():
 #     temp_f = score * 9/5 + 32
@@ -126,5 +110,11 @@ weather_c = eval("{'James': 3, 'Michael': 42, 'Robert': 25, 'John': 4}")
 # print(weather_c)
 
 convert_c_to_f = {name:score * 9/5 + 32 for (name, score) in weather_c.items()}
-print(convert_c_to_f)
+print("Convert celsius to fahrenheit:", convert_c_to_f)
 
+##########################################
+
+names = ['James', 'Michael', 'Joe', "David"]
+
+new_score = {new_key:random.randint(1,100) for new_key in names}
+print('Names and numbers:', new_score)
