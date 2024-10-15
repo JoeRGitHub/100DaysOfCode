@@ -2,6 +2,35 @@ from tkinter import *
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+import random
+
+# Password with X length
+# The password will be created from s1 to s4 list
+# All characters will be random from all lists - Uppercase, Lowercase, Numbers Symbols
+
+s1 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+      'N', 'O', 'P','Q', 'R', 'S', 'T', 'U', 'V', 'W','X', 'Y', 'Z']
+s2 = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+s3 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+      'x', 'y', 'z']
+s4 = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '=', '/', ']', '[', '{', '}', "'", ':', ',', '.', '/',
+      '<', '>', '~', '`', '/']
+
+password = []
+
+def create_random_pass():
+
+    result = s1 + s2 + s3 + s4
+    # while len(password) < 6:
+    #     password.append(random.choice(result))
+    #     #res = [''.join(ele) for ele in password]
+    password = random.choices(result, k=10) # With 'choices' no need the loop
+    #password.clear()
+    one_str = ''.join(password) # Generate the password as a single string
+    pass_entry.delete(0, 'end') # Clear the previous password in the entry
+    pass_entry.insert(0, one_str) # Insert the newly generated password
+    pass_entry.clipboard_clear()
+    pass_entry.clipboard_append(one_str) # Copy the string to clipboard
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
@@ -12,9 +41,10 @@ def save():
     f = open("db.txt", "a")
     f.write(f'\n{website_entry.get()} | {use_email_entry.get()} | {pass_entry.get()}')
     f.close()
-    #use_email_entry.delete(0, 'end')
+    # Use_email_entry.delete(0, 'end')
     website_entry.delete(0, 'end')
     pass_entry.delete(0, 'end')
+
 
     popup()
 
@@ -64,7 +94,7 @@ pass_entry.grid(row=3, column=1)
 pass_entry.insert(END, "")
 
 # Button's
-generate_button = Button(text="Generate Pass")
+generate_button = Button(text="Generate Pass", command=create_random_pass)
 generate_button.grid(row=3, column=2, columnspan=2)
 add_button = Button(text="Add", width=33, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
