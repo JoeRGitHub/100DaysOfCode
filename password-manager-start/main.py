@@ -1,30 +1,21 @@
 from tkinter import *
-
-
-# ---------------------------- PASSWORD GENERATOR ------------------------------- #
+import string
 import random
+# ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # Password with X length
 # The password will be created from s1 to s4 list
 # All characters will be random from all lists - Uppercase, Lowercase, Numbers Symbols
-
-s1 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-      'N', 'O', 'P','Q', 'R', 'S', 'T', 'U', 'V', 'W','X', 'Y', 'Z']
-s2 = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-s3 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
-      'x', 'y', 'z']
-s4 = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '=', '/', ']', '[', '{', '}', "'", ':', ',', '.', '/',
-      '<', '>', '~', '`', '/']
+db_digit = string.printable
 
 password = []
 
 def create_random_pass():
-
-    result = s1 + s2 + s3 + s4
+    # result = s1 + s2 + s3 + s4
     # while len(password) < 6:
     #     password.append(random.choice(result))
     #     #res = [''.join(ele) for ele in password]
-    password = random.choices(result, k=10) # With 'choices' no need the loop
+    password = random.choices(db_digit, k=10) # With 'choices' no need the loop
     #password.clear()
     one_str = ''.join(password) # Generate the password as a single string
     pass_entry.delete(0, 'end') # Clear the previous password in the entry
