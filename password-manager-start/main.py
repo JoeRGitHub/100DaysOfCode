@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import string
 import random
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -8,36 +9,43 @@ import random
 # All characters will be random from all lists - Uppercase, Lowercase, Numbers Symbols
 db_digit = string.printable
 
-password = []
+def create_random_pass(password_length=10):
+    password = random.choices(db_digit, k=password_length) # With 'choices' no need the loop
+    return ''.join(password) # Generate the password as a single string
 
-def create_random_pass():
-    # result = s1 + s2 + s3 + s4
-    # while len(password) < 6:
-    #     password.append(random.choice(result))
-    #     #res = [''.join(ele) for ele in password]
-    password = random.choices(db_digit, k=10) # With 'choices' no need the loop
-    #password.clear()
-    one_str = ''.join(password) # Generate the password as a single string
-    pass_entry.delete(0, 'end') # Clear the previous password in the entry
-    pass_entry.insert(0, one_str) # Insert the newly generated password
+def password_manager():
+    new_pass = create_random_pass()
+    pass_entry.delete(0, 'end')  # Clear the previous password in the entry
+    pass_entry.insert(0, new_pass)  # Insert the newly generated password
     pass_entry.clipboard_clear()
-    pass_entry.clipboard_append(one_str) # Copy the string to clipboard
-
+    pass_entry.clipboard_append(new_pass)  # Copy the string to clipboard
+    print(new_pass)
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
     print(use_email_entry.get())
     print(website_entry.get())
     print(pass_entry.get())
+    website = website_entry.get()
+    email = use_email_entry.get()
+    password = pass_entry.get()
+
+    if len(website) == 0 or len(email) == 0 or len(password) == 0:
+        print(len(website), len(email), len(password))
+        messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty.")
+    else:
+        messagebox.showinfo(title="Info", message=f"Confident with saving information?\n "
+                                                  f"Web: {website}"
+                                                  f"\nEmail: {email} "
+                                                  f"\nPass: {password} ")
+
+        if messagebox.askokcancel():
     # Save data to file.text
-    f = open("db.txt", "a")
-    f.write(f'\n{website_entry.get()} | {use_email_entry.get()} | {pass_entry.get()}')
-    f.close()
-    # Use_email_entry.delete(0, 'end')
-    website_entry.delete(0, 'end')
-    pass_entry.delete(0, 'end')
-
-
-    popup()
+            f = open("db.txt", "a")
+            f.write(f'\n{website_entry.get()} | {use_email_entry.get()} | {pass_entry.get()}')
+            f.close()
+            website_entry.delete(0, 'end')
+            pass_entry.delete(0, 'end')
+            popup()
 
 def popup():
     global top
@@ -85,7 +93,7 @@ pass_entry.grid(row=3, column=1)
 pass_entry.insert(END, "")
 
 # Button's
-generate_button = Button(text="Generate Pass", command=create_random_pass)
+generate_button = Button(text="Generate Pass", command=password_manager)
 generate_button.grid(row=3, column=2, columnspan=2)
 add_button = Button(text="Add", width=33, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
