@@ -9,9 +9,11 @@ import random
 # All characters will be random from all lists - Uppercase, Lowercase, Numbers Symbols
 db_digit = string.printable
 
+
 def create_random_pass(password_length=10):
     password = random.choices(db_digit, k=password_length) # With 'choices' no need the loop
     return ''.join(password) # Generate the password as a single string
+
 
 def password_manager():
     new_pass = create_random_pass()
@@ -21,6 +23,8 @@ def password_manager():
     pass_entry.clipboard_append(new_pass)  # Copy the string to clipboard
     print(new_pass)
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
+
 def save():
     print(use_email_entry.get())
     print(website_entry.get())
@@ -33,35 +37,36 @@ def save():
         print(len(website), len(email), len(password))
         messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty.")
     else:
-        messagebox.showinfo(title="Info", message=f"Confident with saving information?\n "
+        if messagebox.askokcancel(title="Info", message=f"Confident with saving information?\n "
                                                   f"Web: {website}"
                                                   f"\nEmail: {email} "
-                                                  f"\nPass: {password} ")
-
-        if messagebox.askokcancel():
-    # Save data to file.text
+                                                  f"\nPass: {password} "):
+            # Save data to file.text
+            messagebox.showinfo(title="Info", message="Your information has been saved successfully.")
             f = open("db.txt", "a")
             f.write(f'\n{website_entry.get()} | {use_email_entry.get()} | {pass_entry.get()}')
             f.close()
             website_entry.delete(0, 'end')
             pass_entry.delete(0, 'end')
-            popup()
+            #popup()
 
-def popup():
-    global top
-    top = Toplevel(windows)
-    top.geometry("350x100")
-    top.title("Approved Window")
-    Label(top, text="Info Saved!", font=('Ariel', 16, 'bold')).place(x=132, y=15)
-    Button(top, text="Close", font=('Poppins bold', 16), command=close_win).place(x=140, y=55)
-    top.transient(windows)  # set to be on top of the main window
-    top.grab_set()  # hijack all commands from the master (clicks on the main window are ignored)
-    windows.wait_window(top)  # pause anything on the main window until this one closes
+# def popup():
+#     global top
+#     top = Toplevel(windows)
+#     top.geometry("350x100")
+#     top.title("Approved Window")
+#     Label(top, text="Info Saved!", font=('Ariel', 16, 'bold')).place(x=132, y=15)
+#     Button(top, text="Close", font=('Poppins bold', 16), command=close_win).place(x=140, y=55)
+#     top.transient(windows)  # set to be on top of the main window
+#     top.grab_set()  # hijack all commands from the master (clicks on the main window are ignored)
+#     windows.wait_window(top)  # pause anything on the main window until this one closes
 
-def close_win():
-    top.destroy()
+# def close_win():
+#     top.destroy()
 
 # ---------------------------- UI SETUP ------------------------------- #
+
+
 windows = Tk()
 windows.title("Password Manager")
 windows.config(padx=30, pady=30)
@@ -97,7 +102,6 @@ generate_button = Button(text="Generate Pass", command=password_manager)
 generate_button.grid(row=3, column=2, columnspan=2)
 add_button = Button(text="Add", width=33, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
-
 
 
 windows.mainloop()
